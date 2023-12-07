@@ -1,2 +1,2 @@
 require("matteo.remap")
-print("hello from matteo")
+require("matteo.set")
