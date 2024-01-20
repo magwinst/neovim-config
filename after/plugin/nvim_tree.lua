@@ -1,5 +1,4 @@
 -- import nvim-tree plugin safely
-
 local setup, nvimtree = pcall(require, "nvim-tree")
 if not setup then
   return
@@ -10,7 +9,11 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- change color for arrows in tree to light blue
-vim.cmd([[ highlight NvimTreeIndentMarker guifg=#3FC5FF ]])
+vim.cmd([[ highlight NvimTreeIndentMarker guifg=#FFFFFF ]])
+vim.cmd [[highlight NvimTreeFolderName guifg=#66d9ef]]
+vim.cmd [[highlight NvimTreeEmptyFolderName guifg=#66d9ef]]
+vim.cmd [[highlight NvimTreeOpenedFolderName guifg=#66d9ef]]
+vim.cmd [[highlight NvimTreeFile guifg=#00ff00]]
 
 -- configure nvim-tree
 nvimtree.setup({
@@ -19,8 +22,8 @@ nvimtree.setup({
     icons = {
       glyphs = {
         folder = {
-          arrow_closed = "U+2192", -- arrow when folder is closed
-          arrow_open = "U+2193", -- arrow when folder is open
+          arrow_closed = "→", -- arrow when folder is closed
+          arrow_open = "↓", -- arrow when folder is open
         },
       },
     },
@@ -39,4 +42,3 @@ nvimtree.setup({
   -- 		ignore = false,
   -- 	},
 })
-

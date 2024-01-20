@@ -49,6 +49,9 @@ vim.keymap.set("n", "<leader>tp", ":tabp<CR>") --  go to previous tab
 
 vim.api.nvim_set_keymap('t', '<S-Space>', ' ', {noremap = true, silent = true})
 
+-- toggle nvimtree
+
+vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 
 
 

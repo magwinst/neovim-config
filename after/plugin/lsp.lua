@@ -15,14 +15,63 @@ lsp_zero.on_attach(function(client, bufnr)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
+local clangd_opts = {
+    cmd = { "clangd", "--clang-tidy", "--header-insertion=iwyu", "--suggest-missing-includes" }
+}
+
+local pylsp_opts = {
+  settings = {
+    pylsp = {
+      configurationSources = {"pycodestyle"},
+      plugins = {
+        pycodestyle = {
+          ignore = {"W293", "W291", "W391", "E305"},  -- Continue ignoring specific warnings
+          hangClosing = false
+        },
+        pyflakes = {
+          enabled = true  -- Enable real-time linting
+        },
+        jedi_completion = {
+          enabled = true,  -- Robust completion suggestions
+          fuzzy = true,  -- Enable fuzzy matching for completions
+        },
+        jedi_definition = {
+          enabled = true,  -- Go to definitions
+          follow_imports = true,  -- Follow imports to their source
+        },
+        jedi_signature_help = {
+          enabled = true  -- Signature information for functions
+        },
+        jedi_symbols = {
+          enabled = true,  -- Symbol information for navigation
+          all_scopes = true  -- Symbols from all scopes not just the current
+        },
+        mypy = {
+          enabled = true,  -- Static type checking with mypy
+          live_mode = false  -- Run mypy on file save, not on the fly
+        },
+        rope_completion = {
+          enabled = true  -- Advanced refactoring library
+        }
+      }
+    }
+  }
+}
+
 require('mason').setup({})
 require('mason-lspconfig').setup({
   ensure_installed = {'clangd', 'pylsp', 'rust_analyzer'},
   handlers = {
     lsp_zero.default_setup,
+    clangd = function()
+      require('lspconfig').clangd.setup(clangd_opts)
+    end,
     lua_ls = function()
       local lua_opts = lsp_zero.nvim_lua_ls()
       require('lspconfig').lua_ls.setup(lua_opts)
+    end,
+    pylsp = function()
+      require('lspconfig').pylsp.setup(pylsp_opts)
     end,
   }
 })
