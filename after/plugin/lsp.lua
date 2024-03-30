@@ -25,7 +25,7 @@ local pylsp_opts = {
       configurationSources = {"pycodestyle"},
       plugins = {
         pycodestyle = {
-          ignore = {"W293", "W291", "W391", "E305"},  -- Continue ignoring specific warnings
+          ignore = {"W293", "W291", "W391", "E305", "E265", "E261", "E262", "W292", "E501", "E231", "E226", "E303", "E228", "E225", "E302"},  -- Continue ignoring specific warnings
           hangClosing = false
         },
         pyflakes = {
