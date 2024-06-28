@@ -98,15 +98,13 @@ return require('packer').startup(function(use)
     }
 
     -- nvim tree
-
     use {
-        'kyazdani42/nvim-tree.lua',
+        'nvim-tree/nvim-tree.lua',
         requires = {
-            'kyazdani42/nvim-web-devicons', -- optional, for file icons
+            'nvim-tree/nvim-web-devicons', -- optional
         },
-        tag = 'nightly' -- optional, to get the latest version
     }
-
+    
 
     use ("tpope/vim-surround")
     use ("christoomey/vim-tmux-navigator")
